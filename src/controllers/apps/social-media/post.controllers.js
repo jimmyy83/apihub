@@ -238,7 +238,7 @@ const updatePost = asyncHandler(async (req, res) => {
       },
     },
     {
-      new: true,
+      returnDocument: "after",
     }
   );
 
@@ -279,7 +279,7 @@ const removePostImage = asyncHandler(async (req, res) => {
         },
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   // retrieve the file object which is being removed

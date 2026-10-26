@@ -144,7 +144,7 @@ const updateSocialProfile = asyncHandler(async (req, res) => {
         location,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   profile = await getUserSocialProfile(req.user._id, req);
@@ -180,7 +180,7 @@ const updateCoverImage = asyncHandler(async (req, res) => {
         },
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   // remove the old cover image

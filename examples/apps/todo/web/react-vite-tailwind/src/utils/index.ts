@@ -14,7 +14,7 @@ export const requestHandler = async (
   onError: (error: string) => void
 ) => {
   // Show loading state if setLoading function is provided
-  setLoading && setLoading(true);
+  if (setLoading) setLoading(true);
   try {
     // Make the API request
     const response = await api();
@@ -29,7 +29,7 @@ export const requestHandler = async (
     onError(error?.response?.data?.message || "Something went wrong");
   } finally {
     // Hide loading state if setLoading function is provided
-    setLoading && setLoading(false);
+    if (setLoading) setLoading(false);
   }
 };
 

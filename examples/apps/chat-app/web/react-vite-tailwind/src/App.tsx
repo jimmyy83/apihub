@@ -1,5 +1,5 @@
-// Importing required modules and components from the react-router-dom and other files.
-import { Routes, Route, Navigate } from "react-router-dom";
+// Importing required modules and components from the react-router and other files.
+import { Routes, Route, Navigate } from "react-router";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import ChatPage from "./pages/chat";

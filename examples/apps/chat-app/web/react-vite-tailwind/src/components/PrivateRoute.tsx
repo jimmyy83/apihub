@@ -1,6 +1,6 @@
-// Import required modules and types from React and react-router-dom libraries
+// Import required modules and types from React and react-router libraries
 import React, { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 // Import authentication context for retrieving user and token information
 import { useAuth } from "../context/AuthContext";

@@ -10,7 +10,7 @@ import {
   QUERY_PARAMS,
   ROUTE_PATHS,
 } from "../../../../constants";
-import { createSearchParams } from "react-router-dom";
+import { createSearchParams } from "react-router";
 import {
   checkIfDateIsInRange,
   convertUTCToLocalTime,

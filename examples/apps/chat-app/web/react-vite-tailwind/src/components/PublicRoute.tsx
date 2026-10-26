@@ -1,6 +1,6 @@
 // Import necessary libraries and types
 import React, { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 
 // Define the PublicRoute component which takes in children as its prop

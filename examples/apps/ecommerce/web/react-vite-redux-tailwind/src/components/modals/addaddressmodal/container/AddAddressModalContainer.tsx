@@ -228,8 +228,9 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
           dispatch({ type: "COUNTRY_SELECTED", payload: value });
           dispatch({ type: "FETCHING" });
           const statesList = await fetchStatesOfCountry(value?.text);
-          statesList &&
+          if (statesList) {
             dispatch({ type: "UPDATE_STATES", payload: statesList });
+          }
         }
         return;
       }
@@ -242,8 +243,9 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
             state.selectedCountry?.text,
             value?.text
           );
-          citiesList &&
+          if (citiesList) {
             dispatch({ type: "UPDATE_CITIES", payload: citiesList });
+          }
         }
         return;
       }

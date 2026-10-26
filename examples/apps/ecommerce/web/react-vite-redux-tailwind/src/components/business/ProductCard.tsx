@@ -1,7 +1,7 @@
 import { Product } from "../../services/product/ProductTypes";
 import Image from "../basic/Image";
 import { DEFAULT_CURRENCY } from "../../data/applicationData";
-import { createSearchParams } from "react-router-dom";
+import { createSearchParams } from "react-router";
 import { PUBLIC_IMAGE_PATHS, QUERY_PARAMS, ROUTE_PATHS } from "../../constants";
 import useCustomNavigate from "../../hooks/useCustomNavigate";
 import { formatAmount } from "../../utils/commonHelper";

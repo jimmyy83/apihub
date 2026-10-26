@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import ProductDetailPage from "../presentation/ProductDetailPage";
 import { QUERY_PARAMS } from "../../../constants";
 import { useEffect, useMemo } from "react";

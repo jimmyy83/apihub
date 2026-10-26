@@ -55,7 +55,7 @@ const updateCategory = asyncHandler(async (req, res) => {
         name,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
   if (!category) {
     throw new ApiError(404, "Category does not exist");

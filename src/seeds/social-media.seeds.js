@@ -25,9 +25,7 @@ const posts = new Array(SOCIAL_POSTS_COUNT).fill("_").map(() => {
     tags: faker.lorem.words({ min: 3, max: 8 }).split(" "),
     images: new Array(SOCIAL_POST_IMAGES_COUNT).fill("_").map(() => {
       return {
-        url: faker.image.urlLoremFlickr({
-          category: "food",
-        }),
+        url: faker.image.url(),
         localPath: "",
       };
     }),

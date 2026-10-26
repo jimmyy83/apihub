@@ -78,17 +78,13 @@ const products = new Array(PRODUCTS_COUNT).fill("_").map(() => {
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     mainImage: {
-      url: faker.image.urlLoremFlickr({
-        category: "product",
-      }),
+      url: faker.image.url(),
       localPath: "",
     },
     price: +faker.commerce.price({ dec: 0, min: 200, max: 500 }),
     stock: +faker.commerce.price({ dec: 0, min: 10, max: 200 }),
     subImages: new Array(PRODUCTS_SUB_IMAGES_COUNT).fill("_").map(() => ({
-      url: faker.image.urlLoremFlickr({
-        category: "product",
-      }),
+      url: faker.image.url(),
       localPath: "",
     })),
   };

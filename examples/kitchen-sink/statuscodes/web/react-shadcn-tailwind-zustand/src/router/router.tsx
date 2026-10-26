@@ -1,6 +1,6 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 import { AppRoutes } from "./routes";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
 import { Suspense, useEffect } from "react";
 import { useAppStore } from "@/store/store";
 import { processCodes } from "@/services/codesList";

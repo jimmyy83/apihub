@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { QUERY_PARAMS } from "../../../constants";
 import { useEffect, useMemo } from "react";
 import useCustomNavigate from "../../../hooks/useCustomNavigate";

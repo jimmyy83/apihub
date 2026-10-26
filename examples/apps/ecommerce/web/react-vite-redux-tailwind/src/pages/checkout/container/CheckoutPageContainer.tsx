@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import CheckoutPage from "../presentation/CheckoutPage"
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import useCustomNavigate from "../../../hooks/useCustomNavigate";
 import { useAppSelector } from "../../../store";
 

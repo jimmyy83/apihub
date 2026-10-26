@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { updateBreakpoint } from "../store/BreakpointSlice";
 import { getCurrentBreakpoint } from "../utils/breakpointsHelper";
 
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import ArrowButton from "../components/basic/ArrowButton";
 import ToastMessage from "../components/basic/ToastMessage";
 import FooterContainer from "../components/widgets/footer/container/FooterContainer";

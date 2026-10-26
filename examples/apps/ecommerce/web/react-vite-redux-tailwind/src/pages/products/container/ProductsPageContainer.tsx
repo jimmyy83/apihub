@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import ProductsPage from "../presentation/ProductsPage";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { QUERY_PARAMS } from "../../../constants";
 
 const ProductsPageContainer = () => {

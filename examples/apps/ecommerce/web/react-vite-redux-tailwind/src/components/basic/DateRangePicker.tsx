@@ -2,7 +2,7 @@ import { ar } from "date-fns/locale/ar";
 import { enIN } from "date-fns/locale/en-IN";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { DateRange, DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
+import "react-day-picker/style.css";
 import { useTranslation } from "react-i18next";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import { useAppSelector } from "../../store";

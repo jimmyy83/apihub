@@ -12,7 +12,7 @@ export const requestHandler = async (
   onError: (error: string) => void
 ) => {
   // Show loading state if setLoading function is provided
-  setLoading && setLoading(true);
+  setLoading?.(true);
   try {
     // Make the API request
     const response = await api();
@@ -30,7 +30,7 @@ export const requestHandler = async (
     onError(error?.response?.data?.message || "Something went wrong");
   } finally {
     // Hide loading state if setLoading function is provided
-    setLoading && setLoading(false);
+    setLoading?.(false);
   }
 };
 
@@ -96,7 +96,7 @@ export class LocalStorage {
     if (value) {
       try {
         return JSON.parse(value);
-      } catch (err) {
+      } catch {
         return null;
       }
     }

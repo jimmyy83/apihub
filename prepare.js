@@ -18,8 +18,8 @@ const runCommand = (command, args) => {
 
 // Function to prepare Husky
 const prepareHusky = () => {
-  // Run husky install
-  const huskyInstallStatus = runCommand("npx", ["husky", "install"]);
+  // Run husky (v9 replaced `husky install` with `husky`)
+  const huskyInstallStatus = runCommand("npx", ["husky"]);
 
   // Check if .husky directory exists, if not, create it
   fs.mkdir(".husky", (err) => {

@@ -119,7 +119,7 @@ const sendMessage = asyncHandler(async (req, res) => {
         lastMessage: message._id,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   // structure the message

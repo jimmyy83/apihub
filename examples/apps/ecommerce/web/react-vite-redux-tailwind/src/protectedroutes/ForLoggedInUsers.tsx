@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { useAppSelector } from "../store";
 import useCustomNavigate from "../hooks/useCustomNavigate";
 import { ROUTE_PATHS } from "../constants";

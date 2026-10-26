@@ -19,8 +19,10 @@ const DetailAndEditModal: React.FC<{
   const [editLoading, setEditLoading] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [title, setTitle] = useState<string>(todo.title);
+  const [description, setDescription] = useState<string>(
+    todo.description
+  );
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.stopPropagation();
@@ -54,10 +56,6 @@ const DetailAndEditModal: React.FC<{
       }
     );
   };
-
-  useEffect(() => {
-    setTitle(todo.title), setDescription(todo.description);
-  }, []);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {

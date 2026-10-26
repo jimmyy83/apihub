@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { To, useLocation, useNavigate } from "react-router-dom";
+import { To, useLocation, useNavigate } from "react-router";
 
 /* Stores previous pathname in state */
 const useCustomNavigate = () => {

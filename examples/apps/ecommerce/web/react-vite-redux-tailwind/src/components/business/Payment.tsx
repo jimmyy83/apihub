@@ -2,7 +2,7 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useEffect, useMemo, useRef } from "react";
 import OrderService from "../../services/order/OrderService";
 import ApiError from "../../services/ApiError";
-import { OnApproveData } from "@paypal/paypal-js/types/components/buttons";
+import { OnApproveData } from "@paypal/paypal-js";
 import useCustomNavigate from "../../hooks/useCustomNavigate";
 import { ROUTE_PATHS } from "../../constants";
 import { useAppDispatch } from "../../store";

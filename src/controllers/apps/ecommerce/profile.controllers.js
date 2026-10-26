@@ -28,7 +28,7 @@ const updateEcomProfile = asyncHandler(async (req, res) => {
         countryCode,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
   return res
     .status(200)

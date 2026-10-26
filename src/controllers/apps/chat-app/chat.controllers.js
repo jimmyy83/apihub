@@ -327,7 +327,7 @@ const renameGroupChat = asyncHandler(async (req, res) => {
         name,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   const chat = await Chat.aggregate([
@@ -476,7 +476,7 @@ const leaveGroupChat = asyncHandler(async (req, res) => {
         participants: req.user?._id, // leave the group
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   const chat = await Chat.aggregate([
@@ -531,7 +531,7 @@ const addNewParticipantInGroupChat = asyncHandler(async (req, res) => {
         participants: participantId, // add new participant id
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   const chat = await Chat.aggregate([
@@ -589,7 +589,7 @@ const removeParticipantFromGroupChat = asyncHandler(async (req, res) => {
         participants: participantId, // remove participant id
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   const chat = await Chat.aggregate([

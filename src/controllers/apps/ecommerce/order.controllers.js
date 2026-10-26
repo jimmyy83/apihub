@@ -64,7 +64,7 @@ const orderFulfillmentHelper = async (orderPaymentId, req) => {
         isPaymentDone: true,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   if (!order) {
@@ -391,7 +391,7 @@ const updateOrderStatus = asyncHandler(async (req, res) => {
         status,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
   return res.status(200).json(
     new ApiResponse(

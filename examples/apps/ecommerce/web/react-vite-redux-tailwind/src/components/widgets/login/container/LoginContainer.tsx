@@ -3,7 +3,7 @@ import { LoginFormFields, ROUTE_PATHS } from "../../../../constants";
 import Login from "../presentation/Login";
 import AuthService from "../../../../services/auth/AuthService";
 import ApiError from "../../../../services/ApiError";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../../../store/AuthSlice";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";

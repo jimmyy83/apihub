@@ -86,7 +86,7 @@ const updateAddress = asyncHandler(async (req, res) => {
         state,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   if (!address) {

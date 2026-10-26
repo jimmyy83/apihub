@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import PaymentFeedbackPage from "../presentation/PaymentFeedbackPage"
 import { useEffect } from "react";
 import useCustomNavigate from "../../../hooks/useCustomNavigate";

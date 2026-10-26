@@ -168,10 +168,10 @@ const logoutUser = asyncHandler(async (req, res) => {
     req.user._id,
     {
       $set: {
-        refreshToken: '',
+        refreshToken: "",
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   const options = {
@@ -487,7 +487,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
         },
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   ).select(
     "-password -refreshToken -emailVerificationToken -emailVerificationExpiry"
   );

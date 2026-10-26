@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import navigationMenuItems from "./menuItem";
 import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 
 export default function Header() {
   const { pathname } = useLocation();

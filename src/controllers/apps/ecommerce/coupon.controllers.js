@@ -109,7 +109,7 @@ const applyCoupon = asyncHandler(async (req, res) => {
         coupon: coupon._id,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   const newCart = await getCart(req.user._id);
@@ -130,7 +130,7 @@ const removeCouponFromCart = asyncHandler(async (req, res) => {
         coupon: null,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   const newCart = await getCart(req.user._id);
@@ -151,7 +151,7 @@ const updateCouponActiveStatus = asyncHandler(async (req, res) => {
         isActive,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   if (!updatedCoupon) {
@@ -311,7 +311,7 @@ const updateCoupon = asyncHandler(async (req, res) => {
         expiryDate,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   return res

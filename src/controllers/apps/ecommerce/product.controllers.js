@@ -163,7 +163,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       },
     },
     {
-      new: true,
+      returnDocument: "after",
     }
   );
 
@@ -253,7 +253,7 @@ const removeProductSubImage = asyncHandler(async (req, res) => {
         },
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   // retrieve the file object which is being removed

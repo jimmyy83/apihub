@@ -1,7 +1,7 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import { rateLimit } from "express-rate-limit";
+import { ipKeyGenerator, rateLimit } from "express-rate-limit";
 import session from "express-session";
 import fs from "fs";
 import { createServer } from "http";
@@ -23,14 +23,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const file = fs.readFileSync(path.resolve(__dirname, "./swagger.yaml"), "utf8");
-const swaggerDocument = YAML.parse(
-  file?.replace(
-    "- url: ${{server}}",
-    `- url: ${process.env.FREEAPI_HOST_URL || "http://localhost:8080"}/api/v1`
-  )
-);
+const swaggerDocument = YAML.parse(file);
+
+// Point the docs at this server instead of the hosted https://api.freeapi.app when a host url is configured
+if (process.env.FREEAPI_HOST_URL) {
+  swaggerDocument.servers = [{ url: `${process.env.FREEAPI_HOST_URL}/api/v1` }];
+}
 
 const app = express();
+
+// Express 5 defaults to the "simple" query parser; keep nested query params (e.g. `?a[b]=c`) working as before
+app.set("query parser", "extended");
 
 const httpServer = createServer(app);
 
@@ -60,17 +63,17 @@ app.use(requestIp.mw());
 // Rate limiter to avoid misuse of the service and avoid cost spikes
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5000, // Limit each IP to 500 requests per `window` (here, per 15 minutes)
+  limit: 5000, // Limit each IP to 500 requests per `window` (here, per 15 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   keyGenerator: (req, res) => {
-    return req.clientIp; // IP address from requestIp.mw(), as opposed to req.ip
+    return ipKeyGenerator(req.clientIp); // IP address from requestIp.mw(), as opposed to req.ip. ipKeyGenerator groups IPv6 addresses by subnet
   },
   handler: (_, __, ___, options) => {
     throw new ApiError(
       options.statusCode || 500,
       `There are too many requests. You are only allowed ${
-        options.max
+        options.limit
       } requests per ${options.windowMs / 60000} minutes`
     );
   },
@@ -81,6 +84,11 @@ app.use(limiter);
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+// Express 5 leaves `req.body` undefined when no body is parsed; controllers destructure it, so default to `{}` like Express 4
+app.use((req, res, next) => {
+  req.body ??= {};
+  next();
+});
 app.use(express.static("public")); // configure static file to save images locally
 app.use(cookieParser());
 

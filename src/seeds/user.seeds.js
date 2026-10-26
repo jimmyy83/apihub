@@ -15,10 +15,10 @@ import { USERS_COUNT } from "./_constants.js";
 // Array of fake users
 const users = new Array(USERS_COUNT).fill("_").map(() => ({
   avatar: {
-    url: faker.internet.avatar(),
+    url: faker.image.avatar(),
     localPath: "",
   },
-  username: faker.internet.userName(),
+  username: faker.internet.username(),
   email: faker.internet.email(),
   password: faker.internet.password(),
   isEmailVerified: true,
@@ -29,7 +29,7 @@ const users = new Array(USERS_COUNT).fill("_").map(() => ({
  * @description Seeding middleware for users api which other api services can use which are dependent on users
  */
 const seedUsers = asyncHandler(async (req, res, next) => {
-  const userCount = await User.count();
+  const userCount = await User.countDocuments();
   if (userCount >= USERS_COUNT) {
     // Don't re-generate the users if we already have them in the database
     next();

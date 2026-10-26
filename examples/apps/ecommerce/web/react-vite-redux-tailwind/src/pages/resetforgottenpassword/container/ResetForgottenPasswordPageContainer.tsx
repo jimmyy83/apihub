@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import ResetForgottenPasswordPage from "../presentation/ResetForgottenPasswordPage";
 import useCustomNavigate from "../../../hooks/useCustomNavigate";
 import { ROUTE_PATHS } from "../../../constants";

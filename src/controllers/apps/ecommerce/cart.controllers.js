@@ -105,10 +105,15 @@ const addItemOrUpdateItemQuantity = asyncHandler(async (req, res) => {
   const { productId } = req.params;
   const { quantity = 1 } = req.body;
 
-  // fetch user cart
-  const cart = await Cart.findOne({
-    owner: req.user._id,
-  });
+  // fetch user cart, creating one if the user doesn't have it yet
+  const cart =
+    (await Cart.findOne({
+      owner: req.user._id,
+    })) ??
+    (await Cart.create({
+      owner: req.user._id,
+      items: [],
+    }));
 
   // See if product that user is adding exist in the db
   const product = await Product.findById(productId);
@@ -124,9 +129,9 @@ const addItemOrUpdateItemQuantity = asyncHandler(async (req, res) => {
       400,
       product.stock > 0
         ? "Only " +
-          product.stock +
-          " products are remaining. But you are adding " +
-          quantity
+            product.stock +
+            " products are remaining. But you are adding " +
+            quantity
         : "Product is out of stock"
     );
   }
@@ -187,7 +192,7 @@ const removeItemFromCart = asyncHandler(async (req, res) => {
         },
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
 
   let cart = await getCart(req.user._id);
@@ -217,7 +222,7 @@ const clearCart = asyncHandler(async (req, res) => {
         coupon: null,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
   const cart = await getCart(req.user._id);
 

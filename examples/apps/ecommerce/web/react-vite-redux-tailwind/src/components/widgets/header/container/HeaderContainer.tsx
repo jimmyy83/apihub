@@ -16,7 +16,7 @@ import {
 import { getNavigationItemList } from "../../../../data/applicationData";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { getUserCartThunk, resetCartSlice } from "../../../../store/CartSlice";
-import { createSearchParams } from "react-router-dom";
+import { createSearchParams } from "react-router";
 
 const HeaderContainer = React.forwardRef(function HeaderContainer(
   _,

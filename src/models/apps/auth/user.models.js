@@ -78,13 +78,12 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
 
-userSchema.post("save", async function (user, next) {
+userSchema.post("save", async function (user) {
   // ! Generally, querying data on every user save is not a good idea and not necessary when you are working on a specific application which has concrete models which are tightly coupled
   // ! However, in this application this user model is being referenced in many loosely coupled models so we need to do some initial setups before proceeding to make sure the data consistency and integrity
   const ecomProfile = await EcomProfile.findOne({ owner: user._id });
@@ -110,7 +109,6 @@ userSchema.post("save", async function (user, next) {
       owner: user._id,
     });
   }
-  next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {

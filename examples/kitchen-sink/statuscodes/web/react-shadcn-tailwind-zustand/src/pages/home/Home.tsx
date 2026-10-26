@@ -2,7 +2,7 @@ import { PageContainer } from "@/layout";
 import { hero_illustrator, wave_vector } from "./assets";
 import { Button } from "@/components/ui/button";
 import "./home.css";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 export default function Home() {
   return (
     <PageContainer

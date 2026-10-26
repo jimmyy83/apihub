@@ -9,7 +9,7 @@ import {
 } from "../../controllers/kitchen-sink/responseinspection.controllers.js";
 import { setCacheControlHeaderValidator } from "../../validators/kitchen-sink/responseinspection.validators.js";
 import { validate } from "../../validators/validate.js";
-import compression from "express-compression";
+import compression from "compression";
 
 const router = Router();
 
@@ -20,16 +20,16 @@ router.route("/headers").get(getResponseHeaders);
 router.route("/html").get(sendHTMLTemplate);
 router.route("/xml").get(sendXMLData);
 
-router.use(compression()).route("/gzip").get(sendGzipResponse);
+// `compression` prefers brotli when the client accepts it, so drop `br` to keep this route gzip encoded
+const acceptGzipOnly = (req, res, next) => {
+  req.headers["accept-encoding"] = req.headers["accept-encoding"]
+    ?.split(",")
+    .filter((encoding) => encoding.trim().split(";")[0] !== "br")
+    .join(",");
+  next();
+};
 
-router
-  .use(
-    compression({
-      brotli: {
-        enabled: true,
-        zlib: {},
-      },
-    })
-  )
-  .get("/brotli", sendBrotliResponse);
+router.route("/gzip").get(acceptGzipOnly, compression(), sendGzipResponse);
+router.route("/brotli").get(compression(), sendBrotliResponse);
+
 export default router;

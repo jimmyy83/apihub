@@ -122,20 +122,17 @@ const CartSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserCartThunk.fulfilled, (state, { payload }) => {
       state.userCart = payload;
-    }),
-      builder.addCase(
-        addOrUpdateToCartThunk.fulfilled,
-        (state, { payload }) => {
-          if (payload) {
-            state.userCart = payload;
-          }
-        }
-      ),
-      builder.addCase(removeFromCartThunk.fulfilled, (state, { payload }) => {
-        if (payload) {
-          state.userCart = payload;
-        }
-      });
+    });
+    builder.addCase(addOrUpdateToCartThunk.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.userCart = payload;
+      }
+    });
+    builder.addCase(removeFromCartThunk.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.userCart = payload;
+      }
+    });
   },
 });
 
