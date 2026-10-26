@@ -154,7 +154,10 @@ import statuscodeRouter from "./routes/kitchen-sink/statuscode.routes.js";
 
 // * Seeding handlers
 import logger from "./logger/winston.logger.js";
-import { avoidInProduction } from "./middlewares/auth.middlewares.js";
+import {
+  avoidInProduction,
+  verifyResetDbSecret,
+} from "./middlewares/auth.middlewares.js";
 import { seedChatApp } from "./seeds/chat-app.seeds.js";
 import { seedEcommerce } from "./seeds/ecommerce.seeds.js";
 import { seedSocialMedia } from "./seeds/social-media.seeds.js";
@@ -242,7 +245,7 @@ app.post(
 initializeSocketIO(io);
 
 // ! 🚫 Danger Zone
-app.delete("/api/v1/reset-db", avoidInProduction, async (req, res) => {
+const resetDatabase = async (req, res) => {
   if (dbInstance) {
     // Drop the whole DB
     await dbInstance.connection.db.dropDatabase({
@@ -275,7 +278,11 @@ app.delete("/api/v1/reset-db", avoidInProduction, async (req, res) => {
       .json(new ApiResponse(200, null, "Database dropped successfully"));
   }
   throw new ApiError(500, "Something went wrong while dropping the database");
-});
+};
+
+app.delete("/api/v1/reset-db", avoidInProduction, resetDatabase);
+// Called by the scheduled reset job, which can only send GET/POST requests
+app.post("/api/v1/reset-db/scheduled", verifyResetDbSecret, resetDatabase);
 
 // * API DOCS
 // ? Keeping swagger code at the end so that we can load swagger on "/" route

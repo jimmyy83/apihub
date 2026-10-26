@@ -1,2 +1,14 @@
 /.vscode
 /node_modules
+**/node_modules
+.git
+.env
+.env.*
+!.env.sample
+.insta
+.claude
+.codex
+.agents
+examples
+test-results
+playwright-report

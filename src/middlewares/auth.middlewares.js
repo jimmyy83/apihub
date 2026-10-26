@@ -2,6 +2,7 @@ import { AvailableUserRoles } from "../constants.js";
 import { User } from "../models/apps/auth/user.models.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
 export const verifyJWT = asyncHandler(async (req, res, next) => {
@@ -83,4 +84,24 @@ export const avoidInProduction = asyncHandler(async (req, res, next) => {
       "This service is only available in the local environment. For more details visit: https://github.com/hiteshchoudhary/apihub/#readme"
     );
   }
+});
+
+/**
+ * @description Lets the scheduled database reset through in any environment when the request's `x-reset-db-secret` header matches `RESET_DB_SECRET`
+ */
+export const verifyResetDbSecret = asyncHandler(async (req, res, next) => {
+  const secret = process.env.RESET_DB_SECRET;
+  const providedSecret = req.header("x-reset-db-secret");
+
+  // Compare the hashes so timingSafeEqual gets equal length buffers
+  const hash = (value) => crypto.createHash("sha256").update(value).digest();
+
+  if (
+    !secret ||
+    !providedSecret ||
+    !crypto.timingSafeEqual(hash(secret), hash(providedSecret))
+  ) {
+    throw new ApiError(401, "Unauthorized request");
+  }
+  next();
 });

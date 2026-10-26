@@ -7,9 +7,10 @@ export let dbInstance = undefined;
 
 const connectDB = async () => {
   try {
-    const connectionInstance = await mongoose.connect(
-      `${process.env.MONGODB_URI}/${DB_NAME}`
-    );
+    // Pass the db name as an option so URIs that already carry a path or query (e.g. `/admin?authSource=admin`) keep working
+    const connectionInstance = await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: DB_NAME,
+    });
     dbInstance = connectionInstance;
     logger.info(
       `\n☘️  MongoDB Connected! Db host: ${connectionInstance.connection.host}\n`
